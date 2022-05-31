@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>USING IMAGES (SLICING)</title>
+    </head>
+    <body>
+        <!-- Original File 800px * 800px -->
+        <canvas id="canvas" width="800" height="800"></canvas>
+        <script>
+            const draw = () => {
+                const ctx = document.getElementById("canvas").getContext("2d");
+
+                const img = new Image();
+                img.onload = () => {
+                    // Slicing
+                    // [optional]:
+                    // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+                    for (let i = 0; i <= 7; i++) {
+                        for (let k = 0; k <= 7; k++) {
+                            ctx.drawImage(
+                                img,
+                                200,
+                                300,
+                                400,
+                                400,
+                                100 * i,
+                                100 * k,
+                                100,
+                                100
+                            );
+                        }
+                    }
+                };
+                img.src = "Dizzy.png";
+
+                // Controlling image scaling behavior
+                ctx.mozImageSmoothingEnabled = false;
+                ctx.webkitImageSmoothingEnabled = false;
+                ctx.msImageSmoothingEnabled = false;
+                ctx.imageSmoothingEnabled = false;
+            };
+
+            draw();
+        </script>
+    </body>
+</html>
