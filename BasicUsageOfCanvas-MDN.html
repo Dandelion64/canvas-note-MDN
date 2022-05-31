@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASIC USAGE OF CANVAS</title>
+</head>
+<body>
+    <canvas id="tutorial" width="150" height="150"></canvas>
+    <!-- <canvas> 必須要有封閉標籤 只有 width 和 height 兩個屬性 -->
+    <!-- 沒有設定的時候 寬高將預設為 300px / 150px -->
+    <!-- 注意當渲染失真的時候 請調整寬高而非 CSS -->
+    <!-- 給 <canvas> 一個 ID 通常是好主意 -->
+    <!-- 因為這使對其進行 DOM 操作與識別變得更加容易 -->
+    <!-- <canvas> 可以像普通圖樣一樣設定樣式 -->
+    <!-- 比方說 margin, border, background -->
+    <!-- 但不會影響畫布上的實際繪圖 -->
+    <!-- 沒有樣式時 <canvas> 被預設為完全透明 -->
+    <!-- 因為 IE9 之前不支援 <canvas> 應該準備後備內容 -->
+    <!-- 例如 -->
+    <canvas id="stockGraph" width="150" height="150">
+        current stock price: $3.15 + 0.15
+    </canvas>
+    
+    <canvas id="clock" width="150" height="150">
+        <img src="./images/clock.png" width="150" height="150" alt=""/>
+    </canvas>
+</body>
+</html>
