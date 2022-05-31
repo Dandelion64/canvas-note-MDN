@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BASIC ANIMATIONS 02</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="200"></canvas>
+        <script>
+            // step 01:
+            // 除非要繪製的形狀填滿整個畫布
+            // 否則需要清除之前繪製的任何形狀
+            // 使用 clearRect()
+
+            // step 02:
+            // 保存畫布狀態
+
+            // step 03
+            // 繪製動畫形狀
+
+            // step 04
+            // 恢復畫布狀態
+
+            // 會在腳本執行完成時看到繪製結果
+            // 不可能在 for loop 中製作動畫
+
+            // 有兩種方法可以選擇
+            // setTimeout() / setInterval()
+            // requestAnimationFrame(callback)
+            // Ref: https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+
+            // Warning: Be sure to always use the first argument (or some other method for getting the current time) to calculate how much the animation will progress in a frame, otherwise the animation will run faster on high refresh rate screens.
+
+            // window.cancelAnimationFrame()
+            const img = new Image();
+
+            // User Variables - customize these to change the image being scrolled, its
+            // direction, and the speed.
+
+            img.src = "capitan_meadows_yosemite_national_park.jpg";
+            const CanvasXSize = 800;
+            const CanvasYSize = 200;
+            const speed = 30; // lower is faster
+            // const scale = 0.75;
+            const scale = 1.25;
+            const y = -4.5; // vertical offset
+
+            // Main program
+
+            const dx = 0.75;
+            const imgW = img.width * scale;
+            const imgH = img.height * scale;
+            let x = 0;
+            let clearX;
+            let clearY;
+            let ctx;
+
+            img.onload = () => {
+                if (imgW > CanvasXSize) {
+                    // image larger than canvas
+                    x = CanvasXSize - imgW;
+                }
+
+                if (imgW > CanvasXSize) {
+                    // image width larger than canvas
+                    clearX = imgW;
+                } else {
+                    clearX = CanvasXSize;
+                }
+
+                if (imgH > CanvasYSize) {
+                    // image height larger than canvas
+                    clearY = imgH;
+                } else {
+                    clearY = CanvasYSize;
+                }
+
+                // get canvas context
+                ctx = document.getElementById("canvas").getContext("2d");
+
+                // set refresh rate
+                return setInterval(draw, speed);
+            };
+
+            const draw = () => {
+                ctx.clearRect(0, 0, clearX, clearY); // clear the canvas
+
+                // if image is <= Canvas Size
+                if (imgW <= CanvasXSize) {
+                    // reset, start from beginning
+                    if (x > CanvasXSize) {
+                        x = -imgW + x;
+                    }
+                    // draw additional image1
+                    if (x > 0) {
+                        ctx.drawImage(img, -imgW + x, y, imgW, imgH);
+                    }
+                    // draw additional image2
+                    // 再畫一張
+                    if (x - imgW > 0) {
+                        ctx.drawImage(img, -imgW * 2 + x, y, imgW, imgH);
+                    }
+                }
+
+                // image is > Canvas Size
+                else {
+                    // reset, start from beginning
+                    if (x > CanvasXSize) {
+                        x = CanvasXSize - imgW;
+                    }
+                    // draw additional image
+                    if (x > CanvasXSize - imgW) {
+                        ctx.drawImage(img, x - imgW + 1, y, imgW, imgH);
+                    }
+                }
+                // draw image
+                ctx.drawImage(img, x, y, imgW, imgH);
+                // amount to move
+                x += dx;
+            }
+        </script>
+    </body>
+</html>
